@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Summoned : MonoBehaviour {
-    GameObject portal;
+    public GameObject portal;
+    public string portalName;
 
 	void Start ()
     {
         //召喚元のサイズに合わせてオブジェクトのサイズを変える
-        portal = GameObject.Find("Portal");
+        portal = GameObject.Find(portalName);
 
         Vector3 portalSize = portal.transform.localScale;
 
@@ -17,7 +18,7 @@ public class Summoned : MonoBehaviour {
         //アタッチされてるオブジェクトを勢い良く飛ばす
         Rigidbody rb = GetComponent<Rigidbody> ();
 
-        rb.AddForce(Vector3.back * 20f);
+        rb.AddForce(portal.transform.forward * 5f);
     }
 	
 }

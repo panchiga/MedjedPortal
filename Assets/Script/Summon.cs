@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Summon : MonoBehaviour {
+    public string myname;
 
     public GameObject Object;
     public int summonNum;
@@ -24,14 +25,17 @@ public class Summon : MonoBehaviour {
         if (summonCount <= summonNum)
         {
             //ObjectのInstance作成
-            Instantiate(Object, transform.position, transform.rotation);
-            
+            //TODO: もうちょっといい親の名前の教え方ありそう方法
+            GameObject clone = Instantiate(Object, transform.position, transform.rotation);
+
+            clone.GetComponent<Summoned>().portalName = myname;
+
             summonCount++;
         }
 
         if (summonCount > summonNum) {
-            GameObject portal = GameObject.Find("Portal");
-            GameObject.Destroy(portal,0.5f);
+            GameObject portal = GameObject.Find(myname);
+            GameObject.Destroy(portal, 0.5f);
 
             Debug.Log("Destroy Portal");
         }

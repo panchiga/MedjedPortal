@@ -24,9 +24,16 @@ public class Summon : MonoBehaviour {
         if (summonCount <= summonNum)
         {
             //ObjectのInstance作成
-            Instantiate(Object, Vector3.forward, Quaternion.identity);
+            Instantiate(Object, transform.position, transform.rotation);
             
             summonCount++;
+        }
+
+        if (summonCount > summonNum) {
+            GameObject portal = GameObject.Find("Portal");
+            GameObject.Destroy(portal,0.5f);
+
+            Debug.Log("Destroy Portal");
         }
     }
 }
